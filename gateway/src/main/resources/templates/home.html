@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/layout">
+
+<div layout:fragment="breadcrumb">
+    <h2>This is main title</h2>
+    <ol class="breadcrumb">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li class="active">
+            <strong>Home</strong>
+        </li>
+    </ol>
+</div>
+
+<div layout:fragment="content">
+    Home
+</div>
+
+<div layout:fragment="scripts">
+
+</div>
+
+</html>

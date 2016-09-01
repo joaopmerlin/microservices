@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/layout">
+
+<div layout:fragment="breadcrumb">
+    <h2>Finalizar cadastro</h2>
+    <ol class="breadcrumb">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li class="active">
+            <strong>Finalizar cadastro</strong>
+        </li>
+    </ol>
+</div>
+
+<div layout:fragment="content" ng-controller="finalizarCadastroController">
+
+    <form ng-submit="save(filial)">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Cadastro</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>CNPJ</label>
+                                    <input ng-model="filial.cnpj" type="text" placeholder="CNPJ" class="form-control"
+                                           required="required"/>
+                                    <button type="button" ng-click="buscaCnpj(filial.cnpj)"
+                                            class="btn btn-primary btn-busca">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Razão Social</label>
+                                    <input ng-model="filial.razao" type="text" placeholder="Razão Social"
+                                           class="form-control" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Nome Fantasia</label>
+                                    <input ng-model="filial.fantasia" type="text" placeholder="Nome Fantasia"
+                                           class="form-control" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="ibox-footer">
+                        <button type="submit" class="pull-right btn btn-primary">Prosseguir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div layout:fragment="scripts">
+    <script th:src="@{js/controller/finalizarCadastroController.js}"></script>
+</div>
+
+</html>

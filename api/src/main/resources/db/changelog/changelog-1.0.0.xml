@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet id="1" author="joao">
+        <createSequence sequenceName="seq_hibernate"/>
+    </changeSet>
+
+    <changeSet id="2" author="joao">
+        <createTable tableName="empresa">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ativo" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="joao">
+        <createTable tableName="filial">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="empresa" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_filial_empresa" references="empresa(id)"/>
+            </column>
+            <column name="razao" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fantasia" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ativo" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="joao">
+        <createTable tableName="privilegio">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="joao">
+        <createTable tableName="usuario">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="empresa" type="bigint">
+                <constraints foreignKeyName="fk_usuario_empresa" references="empresa(id)"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="senha" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cadastro" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ativo" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="joao">
+        <createTable tableName="grupo">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="empresa" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_grupo_empresa" references="empresa(id)"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ativo" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="joao">
+        <createTable tableName="usuariogrupo">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="usuario" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_usuariogrupo_usuario" references="usuario(id)"/>
+            </column>
+            <column name="grupo" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_usuariogrupo_grupo"
+                             references="grupo(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="8" author="joao">
+        <createTable tableName="grupoprivilegio">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="grupo" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_grupoprivilegio_grupo"
+                             references="grupo(id)"/>
+            </column>
+            <column name="privilegio" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_grupoprivilegio_privilegio"
+                             references="privilegio(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="9" author="joao">
+        <insert tableName="privilegio">
+            <column name="id" value="1"/>
+            <column name="role" value="ROLE_USER"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
